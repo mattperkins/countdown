@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Countdown</title>
+    <style>
+        :root{
+            font-size: 2.4vw;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #eee;
+            font-family: arial;
+        }
+        .wrapper{
+            text-align: center;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            background: #fff;
+            padding: 0;
+            margin: 0;
+        }
+        h1.title{
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin: -1rem;
+        }
+        table,tr,td{
+            padding: 2rem 1.2rem;
+        }
+        td.nums{
+            background: #111;
+            color: #fff;
+            font-size: 4rem;
+        }
+       td.txt{
+           font-size: 2.4rem; 
+           border: 1px solid #666;
+           background: #fcfcfc;
+       } 
+    </style>
+</head>
+<body>
+<table class="wrapper">
+    <tr>
+        <td colspan="4"><h1 class="title">World Cup Starts in...</h1></td>
+    </tr>
+    <tr>
+        <td class="nums" id="days"></td>
+        <td class="nums" id="hours"></td>
+        <td class="nums" id="mins"></td>
+        <td class="nums" id="secs"></td>
+    </tr>
+    <tr>
+        <td class="txt">Days</td>
+        <td class="txt">Hours</td>
+        <td class="txt">Minutes</td>
+        <td class="txt">Seconds</td>
+    </tr>
+</table>
+
+<script>
+    function countDown() {
+        let today = new Date()
+        let eventDate = new Date("June 14, 2018 16:00:00")
+
+        let currentTime = today.getTime()
+        let eventTime = eventDate.getTime()
+
+        let remTime = eventTime - currentTime
+
+        let secs = Math.floor(remTime/1000)
+        let mins = Math.floor(secs/60)
+        let hours = Math.floor(mins/60)
+        let days = Math.floor(hours/24)
+
+        // hours = hours % 24
+        hours%=24
+        mins%=60
+        secs%=60   
+
+        hours = (hours<10) ? "0"+hours : hours
+        mins = (mins<10) ? "0"+mins : mins
+        secs = (secs<10) ? "0"+secs : secs
+
+        document.getElementById("days").innerHTML = days
+        document.getElementById("hours").innerHTML = hours
+        document.getElementById("mins").innerHTML = mins
+        document.getElementById("secs").innerHTML = secs
+
+        setTimeout(countDown, 1000)
+    }
+        countDown()
+</script>
+</body>
+</html>
